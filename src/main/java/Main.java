@@ -8,13 +8,28 @@ public class Main {
     public static void main(String[] args)
     {
 
-        ArrayList<ArrayList<Integer>> Graph = runJumps(10, 3, 100);
+        ArrayList<ArrayList<Integer>> Graph = runJumps(10, 100);
 
         printGraph(Graph);
 
         printProbability(Graph, 3);
 
+        printExpectedValue(Graph);
 
+    }
+
+    public static void printExpectedValue(ArrayList<ArrayList<Integer>> Graph)
+    {
+        double elementTotal = 0;
+        for(int i = 0; i < Graph.size(); i++)
+        {
+            if (!Graph.get(i).isEmpty())
+            {
+                elementTotal += Graph.get(i).size() * Graph.get(i).getFirst();
+            }
+        }
+
+        System.out.println("Expected Value: " + elementTotal / numOfGraphElements(Graph));
     }
 
     public static void printProbability(ArrayList<ArrayList<Integer>> Graph, int in)
@@ -87,7 +102,7 @@ public class Main {
 
 
     //When N = 10, what is the probability that it takes the frog exactly 3 jumps?
-    public static ArrayList<ArrayList<Integer>> runJumps(int jumps, int expected, int trials)
+    public static ArrayList<ArrayList<Integer>> runJumps(int jumps, int trials)
     {
         //Creates and initializes 2D Array to Store results (like a graph)
         ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
