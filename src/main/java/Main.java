@@ -16,9 +16,60 @@ public class Main {
 
         printExpectedValue(Graph);
 
+        printVaryingExpectedValues(1, 10, 100);
+
+
+
     }
 
-    public static void printExpectedValue(ArrayList<ArrayList<Integer>> Graph)
+    public static void printVaryingExpectedValues(int lower, int upper, int trials)
+    {
+        if(upper <= lower)
+        {
+            System.out.println("Error: 2nd Argument must be > 1st Argument");
+            System.exit(1);
+        }
+
+
+        System.out.println();
+        System.out.println("N values on the Y-axis going positive down");
+        System.out.println("Expected values on the X-axis going positive right");
+        System.out.println("Note that each | represents 0.1");
+        System.out.println();
+
+        ArrayList<Double> pairs = new ArrayList<>();
+        for (int i = lower; i <= upper; i++)
+        {
+            ArrayList<ArrayList<Integer>> Graph = runJumps(i, trials);
+            double expected = getExpectedValue(Graph);
+
+            System.out.print("N="+i + ": ");
+            if (i < 10)
+                System.out.print("  ");
+            if (i >= 10 && i<=99)
+                System.out.print(" ");
+
+            for(double j = 0.1; j < expected; j+=0.1)
+            {
+                System.out.print("|");
+            }
+
+            System.out.println();
+
+            pairs.add(1.0*i);
+            pairs.add(expected);
+        }
+
+        System.out.println("Summary: Format is [N | E[X]");
+        for(int i = 0; i < pairs.size(); i+=2)
+        {
+            System.out.print("[" + Math.round(pairs.get(i)) + "|" + pairs.get(i+1) + "]");
+        }
+
+
+    }
+
+    public static double getExpectedValue(ArrayList<ArrayList<Integer>> Graph)
     {
         double elementTotal = 0;
         for(int i = 0; i < Graph.size(); i++)
@@ -29,7 +80,13 @@ public class Main {
             }
         }
 
-        System.out.println("Expected Value: " + elementTotal / numOfGraphElements(Graph));
+        return elementTotal / numOfGraphElements(Graph);
+    }
+
+
+    public static void printExpectedValue(ArrayList<ArrayList<Integer>> Graph)
+    {
+        System.out.println("Expected Value: " + getExpectedValue(Graph));
     }
 
     public static void printProbability(ArrayList<ArrayList<Integer>> Graph, int in)
@@ -104,6 +161,11 @@ public class Main {
     //When N = 10, what is the probability that it takes the frog exactly 3 jumps?
     public static ArrayList<ArrayList<Integer>> runJumps(int jumps, int trials)
     {
+        if(jumps < 0)
+        {
+            System.out.println("Error: Tried to Run with Negative Jumps");
+            System.exit(1);
+        }
         //Creates and initializes 2D Array to Store results (like a graph)
         ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
         for (int i = 0; i <= jumps; i++)
