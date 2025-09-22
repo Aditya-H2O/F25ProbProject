@@ -16,7 +16,7 @@ public class Main {
 
         printExpectedValue(Graph);
 
-        printVaryingExpectedValues(1, 10, 100);
+        printVaryingExpectedValues(1, 10, 1000);
 
 
 
@@ -60,10 +60,10 @@ public class Main {
             pairs.add(expected);
         }
 
-        System.out.println("Summary: Format is [N | E[X]");
+        System.out.println("Summary: Format is [ N | E[X] ]");
         for(int i = 0; i < pairs.size(); i+=2)
         {
-            System.out.print("[" + Math.round(pairs.get(i)) + "|" + pairs.get(i+1) + "]");
+            System.out.print("[ " + Math.round(pairs.get(i)) + "|" + pairs.get(i+1) + " ]");
         }
 
 
