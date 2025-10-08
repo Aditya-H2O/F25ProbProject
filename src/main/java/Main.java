@@ -7,19 +7,22 @@ public class Main {
 
     public static void main(String[] args)
     {
+        //Answer to Q1
+//        ArrayList<ArrayList<Integer>> Graph1 = runJumps(10, 1000000);
+//        printGraph(Graph1);
+//        printProbability(Graph1, 3);
 
-        ArrayList<ArrayList<Integer>> Graph = runJumps(10, 100);
+        //Answer to Q2
+//        ArrayList<ArrayList<Integer>> Graph2 = runJumps(8, 10000000);
+//        printGraph(Graph2);
 
-        printGraph(Graph);
+        //Answer to Q3
+//        ArrayList<ArrayList<Integer>> Graph3 = runJumps(20, 10000000);
+//        printGraph(Graph3);
+//        printExpectedValue(Graph3);
 
-        printProbability(Graph, 3);
-
-        printExpectedValue(Graph);
-
-        printVaryingExpectedValues(1, 10, 1000);
-
-
-
+        //Answer to Q4
+//        printVaryingExpectedValues(1, 100, 10000000);
     }
 
     public static void printVaryingExpectedValues(int lower, int upper, int trials)
@@ -65,6 +68,21 @@ public class Main {
         {
             System.out.print("[ " + Math.round(pairs.get(i)) + "|" + pairs.get(i+1) + " ]");
         }
+
+        System.out.println();
+        System.out.println("Sets:");
+        System.out.print("[");
+        for(int i = 0; i < pairs.size(); i+=2)
+        {
+            System.out.print(Math.round(pairs.get(i)) + ",");
+        }
+        System.out.println("]");
+        System.out.print("[");
+        for(int i = 0; i < pairs.size(); i+=2)
+        {
+            System.out.print(pairs.get(i+1) + ",");
+        }
+        System.out.print("]");
 
 
     }
@@ -182,7 +200,7 @@ public class Main {
 
             while (j > 0)
             {
-                int toSub = rand.nextInt(jumps) + 1;
+                int toSub = rand.nextInt(j) + 1;
                 jumpTotal += 1;
 
                 j-=toSub;
