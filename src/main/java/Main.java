@@ -86,7 +86,7 @@ public class Main {
 
 
     }
-
+//New Stuff 
     public static double getExpectedValue(ArrayList<ArrayList<Integer>> Graph)
     {
         double elementTotal = 0;
